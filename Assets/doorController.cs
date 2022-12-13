@@ -7,11 +7,15 @@ public class doorController : MonoBehaviour
 {
     public string sequence;
     private GameObject[] birds;
+    public GameObject MSTTManager;
     void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            PlayerPrefs.SetString("sequence", sequence);
+            MSTTManager.transform.parent.gameObject.SetActive(true);
+            Cursor.lockState = CursorLockMode.None;
+            MSTTManager.GetComponent<MSTTManager>().PlaySound();
         }
     }
 
@@ -28,7 +32,7 @@ public class doorController : MonoBehaviour
         {
             this.GetComponent<BoxCollider>().enabled = true;
             this.GetComponent<MeshRenderer>().enabled = true;
-            Debug.Log(sequence);
+            //Debug.Log(sequence);
         }
     }
 
